@@ -178,6 +178,48 @@ function loadCourseData() {
             content: getContent3_1(),
             duration: '60분',
             level: '중급'
+        },
+        '3.2': {
+            title: '데이터 품질 관리',
+            content: getContent3_2(),
+            duration: '45분',
+            level: '중급'
+        },
+        '3.3': {
+            title: '기계학습 및 AI 활용',
+            content: getContent3_3(),
+            duration: '90분',
+            level: '고급'
+        },
+        '4.1': {
+            title: '해상 안전 및 보안',
+            content: getContent4_1(),
+            duration: '50분',
+            level: '고급'
+        },
+        '4.2': {
+            title: '해상 교통 관제',
+            content: getContent4_2(),
+            duration: '40분',
+            level: '고급'
+        },
+        '5.1': {
+            title: '퀴즈 및 연습문제',
+            content: getContent5_1(),
+            duration: '60분',
+            level: '고급'
+        },
+        '5.2': {
+            title: '핵심 용어 사전',
+            content: getContent5_2(),
+            duration: '30분',
+            level: '고급'
+        },
+        '5.3': {
+            title: '참고 자료 및 링크',
+            content: getContent5_3(),
+            duration: '20분',
+            level: '고급'
         }
     };
 }
@@ -987,6 +1029,682 @@ function getContent3_1() {
                 <li>✅ 데이터 형식 변환 방법(DBF → CSV)을 설명할 수 있다</li>
                 <li>✅ 노이즈 제거 기법과 결측값 보간 방법을 파악한다</li>
                 <li>✅ Haversine 공식을 활용한 데이터 검증 방법을 이해한다</li>
+            </ul>
+        </div>
+    `;
+}
+
+function getContent3_2() {
+    return `
+        <h2>데이터 품질 관리</h2>
+        
+        <p>선박 행동을 빠르게 식별하고 잠재적인 문제나 위협을 파악하기 위해 자동화된 기계 학습 접근 방식이 필요합니다. AIS 데이터에서 선박의 항적을 정확하게 식별하고 분류하는 것은 해상 안전과 교통 관제에 매우 중요합니다.</p>
+        
+        <h3>항적 식별 및 분류</h3>
+        
+        <h4>Hough 변환 및 DBSCAN</h4>
+        
+        <h5>Hough 변환</h5>
+        <ul>
+            <li><strong>목적:</strong> 선박 항적 정보를 생성하는 데 사용됩니다</li>
+            <li><strong>원리:</strong> 이미지 공간에서 직선을 파라미터 공간으로 변환하여 직선을 감지하는 기법</li>
+            <li><strong>AIS 적용:</strong> 선박의 직선 항로를 식별하고 분석하는 데 활용</li>
+            <li><strong>장점:</strong> 노이즈가 있는 데이터에서도 직선 패턴을 효과적으로 감지</li>
+        </ul>
+        
+        <h5>DBSCAN (Density-Based Spatial Clustering)</h5>
+        <ul>
+            <li><strong>목적:</strong> 선박 항적을 자동으로 식별하는 데 사용됩니다</li>
+            <li><strong>특징:</strong> 저밀도 영역의 데이터를 노이즈로 식별하고 제거</li>
+            <li><strong>k-평균 클러스터링의 단점 보완:</strong>
+                <ul>
+                    <li>클러스터 수를 미리 지정할 필요 없음</li>
+                    <li>임의의 모양의 클러스터를 찾을 수 있음</li>
+                    <li>노이즈 데이터를 자동으로 식별하고 제거</li>
+                </ul>
+            </li>
+            <li><strong>AIS 데이터 적용:</strong> 선박의 항적 패턴을 클러스터링하여 유사한 행동을 보이는 선박들을 그룹화</li>
+        </ul>
+        
+        <h3>지리적 섹터링 및 다운샘플링</h3>
+        
+        <h4>지리적 섹터링</h4>
+        <ul>
+            <li><strong>목적:</strong> 방대한 데이터 분석의 계산 부담을 줄이고 실시간 애플리케이션을 지원</li>
+            <li><strong>방법:</strong> 분석 영역을 더 작은 덩어리로 나누어 처리</li>
+            <li><strong>장점:</strong>
+                <ul>
+                    <li>메모리 사용량 감소</li>
+                    <li>처리 속도 향상</li>
+                    <li>지역별 특성 분석 가능</li>
+                </ul>
+            </li>
+            <li><strong>적용 예:</strong> 특정 해역이나 항만 지역의 선박 교통 분석</li>
+        </ul>
+        
+        <h4>다운샘플링</h4>
+        <ul>
+            <li><strong>목적:</strong> 데이터 포인트를 줄여서 처리 효율성을 높임</li>
+            <li><strong>방법:</strong>
+                <ul>
+                    <li>시간 간격을 늘려서 데이터 포인트 수 감소</li>
+                    <li>중요하지 않은 데이터 포인트 제거</li>
+                    <li>통계적 샘플링 기법 적용</li>
+                </ul>
+            </li>
+            <li><strong>주의사항:</strong> 중요한 정보 손실을 방지하기 위해 적절한 샘플링 전략 필요</li>
+        </ul>
+        
+        <h3>선박 행동 분류</h3>
+        
+        <p>다양한 선박 유형의 행동을 분류하기 위한 기계 학습 시스템이 개발됩니다.</p>
+        
+        <h4>선박 유형별 특성</h4>
+        
+        <div class="ship-types">
+            <div class="ship-type">
+                <h5>어선</h5>
+                <ul>
+                    <li>느리고 꾸준한 속도</li>
+                    <li>많은 코스 변경</li>
+                    <li>특정 어장에서의 순환 패턴</li>
+                </ul>
+            </div>
+            
+            <div class="ship-type">
+                <h5>유조선</h5>
+                <ul>
+                    <li>비교적 높은 속도</li>
+                    <li>일관된 직선 항로</li>
+                    <li>항만 간 정기적인 운항</li>
+                </ul>
+            </div>
+            
+            <div class="ship-type">
+                <h5>화물선</h5>
+                <ul>
+                    <li>중간 속도</li>
+                    <li>정기적인 항로</li>
+                    <li>화물 적재/하역을 위한 정박</li>
+                </ul>
+            </div>
+            
+            <div class="ship-type">
+                <h5>여객선</h5>
+                <ul>
+                    <li>높은 속도</li>
+                    <li>정해진 스케줄</li>
+                    <li>승객 안전을 고려한 안정적인 항로</li>
+                </ul>
+            </div>
+            
+            <div class="ship-type">
+                <h5>도선선</h5>
+                <ul>
+                    <li>짧은 거리 운항</li>
+                    <li>높은 빈도의 왕복</li>
+                    <li>항만 내 제한된 활동 범위</li>
+                </ul>
+            </div>
+        </div>
+        
+        <h4>분류 알고리즘</h4>
+        <ul>
+            <li><strong>지도 학습:</strong> 레이블이 있는 데이터를 사용하여 선박 유형별 행동 패턴 학습</li>
+            <li><strong>비지도 학습:</strong> 데이터의 숨겨진 패턴을 발견하여 새로운 선박 유형 식별</li>
+            <li><strong>앙상블 방법:</strong> 여러 알고리즘의 결과를 결합하여 분류 정확도 향상</li>
+        </ul>
+        
+        <h3>특징 추출</h3>
+        
+        <p>Haversine 거리를 사용하여 두 지점 간의 거리 및 방위와 같은 주요 측정값을 기반으로 다양한 유용한 특징이 추출됩니다.</p>
+        
+        <h4>지리적 특징</h4>
+        <ul>
+            <li><strong>Haversine 거리:</strong> 두 지점 간의 대원거리 계산</li>
+            <li><strong>방위각:</strong> 선박의 진행 방향</li>
+            <li><strong>속도 변화율:</strong> 가속도 및 감속도</li>
+            <li><strong>회전율:</strong> 방향 전환의 급격함</li>
+        </ul>
+        
+        <h4>시간적 특징</h4>
+        <ul>
+            <li><strong>항해 시간:</strong> 총 항해 소요 시간</li>
+            <li><strong>정박 시간:</strong> 항만에서의 체류 시간</li>
+            <li><strong>속도 패턴:</strong> 시간대별 속도 변화</li>
+            <li><strong>항로 복잡도:</strong> 경로의 곡률과 변화</li>
+        </ul>
+        
+        <h4>통계적 특징</h4>
+        <ul>
+            <li><strong>평균 속도:</strong> 전체 항해 구간의 평균 속도</li>
+            <li><strong>속도 분산:</strong> 속도 변화의 정도</li>
+            <li><strong>방향 일관성:</strong> 직선 항로 유지 정도</li>
+            <li><strong>정박 빈도:</strong> 정박 횟수와 패턴</li>
+        </ul>
+        
+        <h3>데이터 품질 검증</h3>
+        
+        <h4>실시간 품질 모니터링</h4>
+        <ul>
+            <li><strong>데이터 완전성:</strong> 필수 필드의 누락 여부 확인</li>
+            <li><strong>데이터 일관성:</strong> 논리적 모순 여부 검사</li>
+            <li><strong>데이터 정확성:</strong> 물리적 제약 조건 검증</li>
+            <li><strong>데이터 신선도:</strong> 최신 데이터 수신 여부 확인</li>
+        </ul>
+        
+        <h4>품질 지표</h4>
+        <ul>
+            <li><strong>완전성 지수:</strong> 필수 데이터 필드의 완성도</li>
+            <li><strong>정확성 지수:</strong> 오류 데이터의 비율</li>
+            <li><strong>일관성 지수:</strong> 논리적 일관성 유지 정도</li>
+            <li><strong>신선도 지수:</strong> 데이터의 최신성 정도</li>
+        </ul>
+        
+        <h4>품질 개선 방안</h4>
+        <ul>
+            <li><strong>자동 보정:</strong> 명백한 오류의 자동 수정</li>
+            <li><strong>데이터 보강:</strong> 누락된 정보의 추론 및 보완</li>
+            <li><strong>이상치 처리:</strong> 비정상적인 데이터의 식별 및 처리</li>
+            <li><strong>검증 규칙:</strong> 데이터 품질을 보장하는 규칙 설정</li>
+        </ul>
+        
+        <div class="learning-objectives">
+            <h4>🎯 학습 목표</h4>
+            <ul>
+                <li>✅ 항적 식별 및 분류 기법을 이해한다</li>
+                <li>✅ Hough 변환과 DBSCAN의 차이점을 설명할 수 있다</li>
+                <li>✅ 선박 유형별 행동 특성을 구분할 수 있다</li>
+                <li>✅ 데이터 품질 검증 방법을 적용할 수 있다</li>
+            </ul>
+        </div>
+    `;
+}
+
+function getContent3_3() {
+    return `
+        <h2>기계학습 및 AI 활용</h2>
+        
+        <p>AIS 시장은 규제 요건, 기술 발전, 운영 효율성 강조에 따라 빠르게 성장하고 있습니다. 특히 IoT, AI, 블록체인, 5G, 자율 기술과의 융합은 AIS 터미널 시장을 근본적으로 재편하고 있습니다.</p>
+        
+        <h3>신기술과의 통합 및 미래 전망</h3>
+        
+        <h4>IoT 통합</h4>
+        <ul>
+            <li><strong>실시간 데이터 교환:</strong> 선박과 육상 시스템 간의 즉각적인 정보 공유</li>
+            <li><strong>상황 인식 향상:</strong> 더 많은 센서 데이터를 통한 종합적인 상황 파악</li>
+            <li><strong>예측적 유지보수:</strong> 선박 장비의 상태를 실시간으로 모니터링하여 고장 예방</li>
+            <li><strong>운영 효율성 증대:</strong> 데이터 기반의 의사결정으로 연료 소비 최적화</li>
+        </ul>
+        
+        <h4>AI 및 딥러닝</h4>
+        <ul>
+            <li><strong>GCNN (그래프 컨볼루션 신경망):</strong> 규제된 선박 항적에 대해 98.3%의 인식 정확도 달성</li>
+            <li><strong>RNN/LSTM:</strong> 시계열 데이터 처리에 특화</li>
+            <li><strong>GRU:</strong> LSTM의 간소화된 버전으로 빠른 학습 속도</li>
+            <li><strong>Extreme Learning Machine:</strong> 빠른 훈련 속도와 높은 일반화 기능</li>
+        </ul>
+        
+        <h3>사이버 보안</h3>
+        
+        <h4>AIS의 보안 취약점</h4>
+        <ul>
+            <li><strong>비보안적 설계:</strong> AIS는 설계상 비보안적이고 비독점적인 개방형 방송</li>
+            <li><strong>스푸핑 위험:</strong> 기만적이거나 허위 방송(스푸핑)을 전송하는 것이 어렵지 않음</li>
+            <li><strong>데이터 무결성:</strong> 전송 과정에서 데이터 조작 가능성</li>
+            <li><strong>개인정보 보호:</strong> 선박의 민감한 정보 노출 위험</li>
+        </ul>
+        
+        <h4>보안 대응 방안</h4>
+        <ul>
+            <li><strong>폴링 메커니즘:</strong> 스푸핑이 의심되는 경우 대상에 새로운 보고서 요청</li>
+            <li><strong>자동 경고 시스템:</strong> 잘못된 대상이 감지될 경우 자동 경고 및 확인 제공</li>
+            <li><strong>암호화 기술:</strong> 민감한 정보의 암호화 전송</li>
+            <li><strong>블록체인 기술:</strong> 데이터 무결성 보장을 위한 분산 원장 기술</li>
+        </ul>
+        
+        <div class="learning-objectives">
+            <h4>🎯 학습 목표</h4>
+            <ul>
+                <li>✅ AI/ML 기술의 AIS 적용 사례를 이해한다</li>
+                <li>✅ IoT 통합의 장점과 활용 방안을 파악한다</li>
+                <li>✅ AIS의 보안 취약점과 대응 방안을 설명할 수 있다</li>
+                <li>✅ 미래 기술 발전 방향을 예측할 수 있다</li>
+            </ul>
+        </div>
+    `;
+}
+
+function getContent4_1() {
+    return `
+        <h2>해상 안전 및 보안</h2>
+        
+        <p>AIS는 단순히 음성으로 정보를 주고받는 무선 통신이나, 레이더처럼 물체의 존재 여부만 파악하는 수준을 넘어, 해상 환경에 최적화된 여러 독점적인 이점들을 제공합니다.</p>
+        
+        <h3>AIS 통신의 주요 특장점</h3>
+        
+        <h4>실시간 자동 정보 교환 및 상황 인식 강화</h4>
+        <ul>
+            <li><strong>자동성 및 지속성:</strong> 선박의 식별 정보, 위치, 속력, 침로 등 핵심 항해 정보를 자동으로 연속적으로 방송</li>
+            <li><strong>충돌 회피 및 안전 증진:</strong> 주변 선박들의 정확한 항해 정보를 실시간으로 파악하여 충돌 위험을 조기에 감지</li>
+        </ul>
+        
+        <h4>풍부하고 표준화된 정보 제공</h4>
+        <ul>
+            <li><strong>선박의 고유 식별자:</strong> MMSI, IMO 번호, 호출 부호, 선명, 선박 유형, 크기 등</li>
+            <li><strong>실시간 운항 정보:</strong> 위치, 속력, 침로, 선회율, 항해 상태 등</li>
+            <li><strong>항해 관련 정보:</strong> 목적지, 예상 도착 시간, 흘수 등</li>
+            <li><strong>안전 관련 메시지:</strong> 해상 위험이나 긴급 상황을 알리는 텍스트 메시지</li>
+        </ul>
+        
+        <h3>해상 안전 및 보안 응용 분야</h3>
+        
+        <h4>교통 이상 감지</h4>
+        <ul>
+            <li>실시간으로 잠재적인 이상 활동이나 선박을 식별</li>
+            <li>어선에 대한 이상 감지는 해양 어업 모니터링에 중요</li>
+        </ul>
+        
+        <h4>충돌 예측</h4>
+        <ul>
+            <li>선박 도메인 모델을 사용하여 충돌 위험을 평가</li>
+            <li>인공 신경망을 통해 학습된 선박 도메인 활용</li>
+        </ul>
+        
+        <h4>수색 및 구조 (SAR) 지원</h4>
+        <ul>
+            <li>조난 선박의 마지막 위치 정보를 제공</li>
+            <li>SAR 항공기와의 연동을 통한 효율적인 구조 활동 지원</li>
+        </ul>
+        
+        <div class="learning-objectives">
+            <h4>🎯 학습 목표</h4>
+            <ul>
+                <li>✅ AIS 통신의 주요 특장점을 설명할 수 있다</li>
+                <li>✅ 해상 안전 및 보안 응용 분야를 이해한다</li>
+                <li>✅ 충돌 예측 및 이상 감지 시스템을 파악한다</li>
+                <li>✅ SAR 지원 시스템의 역할을 설명할 수 있다</li>
+            </ul>
+        </div>
+    `;
+}
+
+function getContent4_2() {
+    return `
+        <h2>해상 교통 관제</h2>
+        
+        <p>해상 교통 관제(Vessel Traffic Service, VTS)는 해안 당국이 AIS 데이터를 활용하여 선박 교통을 식별, 추적, 모니터링하고 관리하는 시스템입니다.</p>
+        
+        <h3>VTS의 주요 기능</h3>
+        <ul>
+            <li><strong>선박 식별 및 추적:</strong> 실시간으로 선박의 위치와 움직임을 모니터링</li>
+            <li><strong>교통 흐름 관리:</strong> 항만 및 해역의 선박 집중도 모니터링</li>
+            <li><strong>충돌 방지 지원:</strong> 선박 간 충돌 위험 감지 및 경고</li>
+            <li><strong>항해 지원:</strong> 기상 정보, 항로 정보 제공</li>
+            <li><strong>응급 상황 대응:</strong> 조난 선박 지원 및 구조 활동 조정</li>
+        </ul>
+        
+        <h3>AIS 기반 VTS 시스템</h3>
+        
+        <h4>시스템 구성 요소</h4>
+        <ul>
+            <li><strong>AIS 기지국:</strong> 해안에 위치하여 선박의 AIS 메시지를 수신</li>
+            <li><strong>데이터 처리 시스템:</strong> 수신된 AIS 데이터를 분석하고 처리</li>
+            <li><strong>관제소:</strong> 실시간 모니터링 및 관제 업무 수행</li>
+            <li><strong>통신 시스템:</strong> 선박과의 양방향 통신 지원</li>
+        </ul>
+        
+        <h3>실시간 선박 추적 및 모니터링</h3>
+        
+        <h4>추적 기능</h4>
+        <ul>
+            <li><strong>위치 추적:</strong> GPS 기반 정확한 위치 정보 제공</li>
+            <li><strong>속도 모니터링:</strong> 선박의 속력 변화 추적</li>
+            <li><strong>침로 추적:</strong> 선박의 진행 방향 모니터링</li>
+            <li><strong>항해 상태:</strong> 정박, 운항, 조업 등 상태 정보</li>
+        </ul>
+        
+        <h3>교통 흐름 분석 및 최적화</h3>
+        
+        <h4>교통 흐름 분석</h4>
+        <ul>
+            <li><strong>선박 밀도:</strong> 특정 해역의 선박 집중도 분석</li>
+            <li><strong>교통 패턴:</strong> 시간대별, 계절별 교통 흐름 분석</li>
+            <li><strong>혼잡도 측정:</strong> 항만 및 해역의 혼잡 정도 평가</li>
+            <li><strong>예측 모델링:</strong> 미래 교통 흐름 예측</li>
+        </ul>
+        
+        <h3>스마트 항만 시스템</h3>
+        
+        <h4>IoT 통합</h4>
+        <ul>
+            <li><strong>센서 네트워크:</strong> 항만 내 다양한 센서 데이터 수집</li>
+            <li><strong>실시간 모니터링:</strong> 항만 시설 및 장비 상태 모니터링</li>
+            <li><strong>자동화 시스템:</strong> 화물 처리 자동화</li>
+            <li><strong>디지털 트윈:</strong> 항만의 디지털 복제본 구축</li>
+        </ul>
+        
+        <div class="learning-objectives">
+            <h4>🎯 학습 목표</h4>
+            <ul>
+                <li>✅ VTS 시스템의 주요 기능을 이해한다</li>
+                <li>✅ AIS 기반 VTS 시스템 구성을 설명할 수 있다</li>
+                <li>✅ 교통 흐름 분석 및 최적화 방법을 파악한다</li>
+                <li>✅ 스마트 항만 시스템의 구성 요소를 이해한다</li>
+            </ul>
+        </div>
+    `;
+}
+
+function getContent5_1() {
+    return `
+        <h2>퀴즈 및 연습문제</h2>
+        
+        <h3>기본 개념 퀴즈</h3>
+        
+        <div class="quiz-question">
+            <h4>문제 1</h4>
+            <p>AIS(자동식별시스템)의 주요 목적은 무엇인가요?</p>
+            <div class="quiz-answer">
+                <strong>정답:</strong>
+                <ul>
+                    <li>해상 안전 증진</li>
+                    <li>충돌 회피 지원</li>
+                    <li>해상 상황 인식 개선</li>
+                    <li>선박 교통 관제(VTS) 지원</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="quiz-question">
+            <h4>문제 2</h4>
+            <p>AIS에서 사용하는 주파수 대역은 무엇인가요?</p>
+            <div class="quiz-answer">
+                <strong>정답:</strong>
+                <ul>
+                    <li>VHF 해상 이동 주파수 대역</li>
+                    <li>주로 161.975 MHz (채널 87b)</li>
+                    <li>주로 162.025 MHz (채널 88B)</li>
+                </ul>
+            </div>
+        </div>
+        
+        <h3>시스템 구성 요소 퀴즈</h3>
+        
+        <div class="quiz-question">
+            <h4>문제 3</h4>
+            <p>Class A AIS와 Class B AIS의 주요 차이점은 무엇인가요?</p>
+            <div class="quiz-answer">
+                <strong>정답:</strong>
+                <ul>
+                    <li><strong>Class A AIS:</strong>
+                        <ul>
+                            <li>SOLAS 협약 의무 설치 대상</li>
+                            <li>더 높은 출력과 보고 빈도</li>
+                            <li>SOTDMA 기술 사용</li>
+                        </ul>
+                    </li>
+                    <li><strong>Class B AIS:</strong>
+                        <ul>
+                            <li>의무 설치 대상 아님</li>
+                            <li>낮은 출력과 보고 빈도</li>
+                            <li>CSTDMA 기술 사용</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <h3>데이터 처리 퀴즈</h3>
+        
+        <div class="quiz-question">
+            <h4>문제 4</h4>
+            <p>AIS 데이터 전처리의 주요 단계 5가지를 말하세요.</p>
+            <div class="quiz-answer">
+                <strong>정답:</strong>
+                <ol>
+                    <li><strong>형식 변환:</strong> DBF → CSV 변환</li>
+                    <li><strong>데이터 선택 및 정렬:</strong> 시간순, MMSI별 정렬</li>
+                    <li><strong>항해 조건 및 복잡성 계산:</strong> SOG > 0, 500개 이상 메시지</li>
+                    <li><strong>노이즈 제거:</strong> 불연속적, 느슨한, 엉킨 궤적 제거</li>
+                    <li><strong>결측값 보간:</strong> 선형 보간법 사용</li>
+                </ol>
+            </div>
+        </div>
+        
+        <h3>종합 문제</h3>
+        
+        <div class="quiz-question">
+            <h4>문제 5 (서술형)</h4>
+            <p>AIS 시스템이 해상 안전에 기여하는 방식을 종합적으로 설명하세요.</p>
+            <div class="quiz-answer">
+                <strong>정답 요점:</strong>
+                <ul>
+                    <li><strong>실시간 정보 교환:</strong> 선박 간 자동 정보 공유</li>
+                    <li><strong>충돌 방지:</strong> 주변 선박 정보를 통한 충돌 위험 감지</li>
+                    <li><strong>상황 인식:</strong> 해상 환경에 대한 종합적 파악</li>
+                    <li><strong>응급 대응:</strong> 조난 상황 시 신속한 대응 지원</li>
+                    <li><strong>교통 관리:</strong> VTS를 통한 효율적 교통 흐름 관리</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="learning-objectives">
+            <h4>🎯 학습 목표</h4>
+            <ul>
+                <li>✅ AIS 기본 개념을 정확히 이해한다</li>
+                <li>✅ 시스템 구성 요소의 차이점을 구분할 수 있다</li>
+                <li>✅ 데이터 처리 과정을 단계별로 설명할 수 있다</li>
+                <li>✅ 해상 안전 기여 방식을 종합적으로 설명할 수 있다</li>
+            </ul>
+        </div>
+    `;
+}
+
+function getContent5_2() {
+    return `
+        <h2>핵심 용어 사전</h2>
+        
+        <h3>AIS 기본 용어</h3>
+        
+        <div class="glossary-term">
+            <h4>AIS (Automatic Identification System)</h4>
+            <ul>
+                <li><strong>한국어:</strong> 자동식별시스템</li>
+                <li><strong>정의:</strong> 선박 간, 선박과 육상 기지국, 또는 위성 간 전자 데이터 교환을 통해 선박의 움직임을 추적하는 자동 추적 시스템</li>
+                <li><strong>목적:</strong> 해상 안전, 보안 및 효율성을 높이는 데 필수적인 정보 제공</li>
+            </ul>
+        </div>
+        
+        <div class="glossary-term">
+            <h4>MMSI (Maritime Mobile Service Identity)</h4>
+            <ul>
+                <li><strong>한국어:</strong> 해상이동업무식별번호</li>
+                <li><strong>정의:</strong> 각 선박에 고유하게 할당된 9자리 숫자 식별자</li>
+                <li><strong>구성:</strong> 국가 코드(3자리) + 선박 식별번호(6자리)</li>
+            </ul>
+        </div>
+        
+        <h3>통신 및 프로토콜 용어</h3>
+        
+        <div class="glossary-term">
+            <h4>TDMA (Time Division Multiple Access)</h4>
+            <ul>
+                <li><strong>한국어:</strong> 시분할다중접속</li>
+                <li><strong>정의:</strong> 한정된 주파수 대역에서 여러 선박이 동시에 통신할 수 있도록 시간을 분할하여 접근 기회를 할당하는 기술</li>
+                <li><strong>구성:</strong> 1분(프레임)을 2,250개의 시간 슬롯으로 분할</li>
+            </ul>
+        </div>
+        
+        <div class="glossary-term">
+            <h4>SOTDMA (Self-Organizing Time Division Multiple Access)</h4>
+            <ul>
+                <li><strong>한국어:</strong> 자체 조직 시분할다중접속</li>
+                <li><strong>정의:</strong> Class A AIS에서 사용하는 통신 방식으로, 주변 통신 현황을 스스로 파악하여 빈 시간 슬롯을 찾아 예약하고 데이터를 전송</li>
+                <li><strong>특징:</strong> 자율적이고 연속적인 운항 모드에 적합</li>
+            </ul>
+        </div>
+        
+        <h3>메시지 및 데이터 용어</h3>
+        
+        <div class="glossary-term">
+            <h4>정적 정보 (Static Information)</h4>
+            <ul>
+                <li><strong>한국어:</strong> 정적 정보</li>
+                <li><strong>정의:</strong> 선박의 고유하고 변하지 않는 특성 정보</li>
+                <li><strong>포함 내용:</strong> MMSI, IMO 번호, 호출 부호, 선명, 선박 유형, 크기, 위치 고정 안테나 위치</li>
+            </ul>
+        </div>
+        
+        <div class="glossary-term">
+            <h4>동적 정보 (Dynamic Information)</h4>
+            <ul>
+                <li><strong>한국어:</strong> 동적 정보</li>
+                <li><strong>정의:</strong> 선박의 실시간 운항 상태 정보</li>
+                <li><strong>포함 내용:</strong> 위치, 속도(SOG), 침로(COG), 선회율(ROT), 항해 상태</li>
+            </ul>
+        </div>
+        
+        <h3>활용 분야 용어</h3>
+        
+        <div class="glossary-term">
+            <h4>VTS (Vessel Traffic Service)</h4>
+            <ul>
+                <li><strong>한국어:</strong> 선박 교통 서비스</li>
+                <li><strong>정의:</strong> 해안 당국이 AIS 데이터를 활용하여 선박 교통을 식별, 추적, 모니터링하고 관리하는 서비스</li>
+                <li><strong>기능:</strong> 충돌 방지, 교통 흐름 관리, 항해 지원</li>
+            </ul>
+        </div>
+        
+        <div class="glossary-term">
+            <h4>SAR (Search and Rescue)</h4>
+            <ul>
+                <li><strong>한국어:</strong> 수색 및 구조</li>
+                <li><strong>정의:</strong> 조난 선박이나 인명을 찾아 구조하는 활동</li>
+                <li><strong>AIS 활용:</strong> 조난 선박의 마지막 위치 정보 제공</li>
+            </ul>
+        </div>
+        
+        <div class="learning-objectives">
+            <h4>🎯 학습 목표</h4>
+            <ul>
+                <li>✅ AIS 관련 핵심 용어의 정확한 정의를 이해한다</li>
+                <li>✅ 통신 프로토콜 용어의 차이점을 구분할 수 있다</li>
+                <li>✅ 메시지 유형별 특징을 설명할 수 있다</li>
+                <li>✅ 활용 분야별 용어의 의미를 파악한다</li>
+            </ul>
+        </div>
+    `;
+}
+
+function getContent5_3() {
+    return `
+        <h2>참고 자료 및 링크</h2>
+        
+        <h3>국제 표준 문서</h3>
+        
+        <h4>IMO (국제해사기구) 문서</h4>
+        <ul>
+            <li><strong>SOLAS 협약:</strong> 해상인명안전협약</li>
+            <li><strong>IMO Resolution MSC.74(69):</strong> 범용 선박 자동 식별 시스템의 성능 표준</li>
+            <li><strong>IMO Resolution A.694(17):</strong> 해상 이동 및 안전 통신 장비의 일반 요구사항</li>
+        </ul>
+        
+        <h4>ITU-R (국제전기통신연합) 문서</h4>
+        <ul>
+            <li><strong>ITU-R M.1371-5:</strong> TDMA 기술을 사용하는 범용 선박 AIS의 기술적 및 운영적 특성 (최신 버전)</li>
+        </ul>
+        
+        <h3>국제기구 웹사이트</h3>
+        
+        <h4>주요 국제기구</h4>
+        <ul>
+            <li><strong>IMO:</strong> https://www.imo.org/</li>
+            <li><strong>ITU-R:</strong> https://www.itu.int/</li>
+            <li><strong>IALA:</strong> https://www.iala-aism.org/</li>
+            <li><strong>IEC:</strong> https://www.iec.ch/</li>
+        </ul>
+        
+        <h4>국내 기관</h4>
+        <ul>
+            <li><strong>해양수산부:</strong> https://www.mof.go.kr/</li>
+            <li><strong>해양안전정책관실:</strong> https://www.mof.go.kr/ais/</li>
+            <li><strong>한국해양수산개발원:</strong> https://www.kmi.re.kr/</li>
+            <li><strong>한국해양과학기술원:</strong> https://www.kiost.ac.kr/</li>
+        </ul>
+        
+        <h3>학술 논문 및 연구 자료</h3>
+        
+        <h4>핵심 연구 논문</h4>
+        <ul>
+            <li><strong>"지능형 해상 항해를 위한 AIS 데이터 활용: 종합 설문조사"</strong> (2016)
+                <ul>
+                    <li>저자: Enmei Tu, Guanghao Zhang, Lily Rachmawati, Eshan Rajabally, Guang-Bin Huang</li>
+                    <li>저널: IEEE Transactions on Intelligent Transportation Systems</li>
+                </ul>
+            </li>
+            <li><strong>"그래프 컨볼루션 신경망을 활용한 선박 상태 인식을 위한 심층 학습 접근 방식"</strong> (2024)
+                <ul>
+                    <li>저자: Lin Ma, Hao Cao, Guo-You Shi, Shengyan Qin</li>
+                    <li>저널: IEEE Transactions on Intelligent Transportation Systems</li>
+                </ul>
+            </li>
+        </ul>
+        
+        <h3>소프트웨어 및 도구</h3>
+        
+        <h4>AIS 데이터 분석 도구</h4>
+        <ul>
+            <li><strong>Python 라이브러리:</strong>
+                <ul>
+                    <li><code>pyais</code>: AIS 메시지 디코딩</li>
+                    <li><code>pandas</code>: 데이터 처리 및 분석</li>
+                    <li><code>scikit-learn</code>: 머신러닝</li>
+                    <li><code>tensorflow/pytorch</code>: 딥러닝</li>
+                </ul>
+            </li>
+            <li><strong>GIS 소프트웨어:</strong>
+                <ul>
+                    <li>ArcGIS: 상용 GIS 소프트웨어</li>
+                    <li>QGIS: 오픈소스 GIS 소프트웨어</li>
+                    <li>Google Earth Engine: 클라우드 기반 지리공간 분석</li>
+                </ul>
+            </li>
+        </ul>
+        
+        <h3>데이터 소스</h3>
+        
+        <h4>공개 AIS 데이터</h4>
+        <ul>
+            <li><strong>MarineTraffic:</strong> https://www.marinetraffic.com/</li>
+            <li><strong>VesselFinder:</strong> https://www.vesselfinder.com/</li>
+            <li><strong>AIS Hub:</strong> https://www.aishub.net/</li>
+            <li><strong>Global Fishing Watch:</strong> https://globalfishingwatch.org/</li>
+        </ul>
+        
+        <h3>교육 자료</h3>
+        
+        <h4>온라인 강의</h4>
+        <ul>
+            <li><strong>Coursera:</strong> "Maritime Data Analysis"</li>
+            <li><strong>edX:</strong> "Introduction to AIS Systems"</li>
+            <li><strong>YouTube:</strong> AIS 관련 교육 채널</li>
+        </ul>
+        
+        <h4>교육 기관</h4>
+        <ul>
+            <li><strong>한국해양대학교:</strong> 해양공학과</li>
+            <li><strong>목포해양대학교:</strong> 해양시스템공학과</li>
+            <li><strong>한국해양과학기술원:</strong> 해양과학기술연수원</li>
+        </ul>
+        
+        <div class="learning-objectives">
+            <h4>🎯 학습 목표</h4>
+            <ul>
+                <li>✅ 국제 표준 문서의 중요성을 이해한다</li>
+                <li>✅ 관련 국제기구와 국내 기관을 파악한다</li>
+                <li>✅ 핵심 연구 논문과 최신 동향을 파악한다</li>
+                <li>✅ 실용적인 소프트웨어 도구를 활용할 수 있다</li>
             </ul>
         </div>
     `;
