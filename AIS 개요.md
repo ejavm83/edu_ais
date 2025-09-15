@@ -1,5 +1,5 @@
 ---
-view-count: 2
+view-count: 3
 tags:
   - AIS
   - 교육자료

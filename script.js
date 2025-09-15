@@ -131,6 +131,12 @@ function showSearchResults(searchTerm) {
 function loadCourseData() {
     // 실제 구현에서는 서버에서 데이터를 가져오거나 JSON 파일을 로드
     courseData = {
+        'overview': {
+            title: 'AIS 개요',
+            content: getContentOverview(),
+            duration: '20분',
+            level: '초급'
+        },
         '1.1': {
             title: 'AIS 개요 및 기본 개념',
             content: getContent1_1(),
@@ -201,6 +207,12 @@ function loadCourseData() {
             title: '해상 교통 관제',
             content: getContent4_2(),
             duration: '40분',
+            level: '고급'
+        },
+        '4.3': {
+            title: '지능형 해상 시스템',
+            content: getContent4_3(),
+            duration: '60분',
             level: '고급'
         },
         '5.1': {
@@ -304,6 +316,82 @@ function setupScrollEffects() {
 }
 
 // 콘텐츠 데이터 함수들
+function getContentOverview() {
+    return `
+        <h2>AIS 개요</h2>
+        
+        <p>신입사원 여러분, 안녕하세요! 오늘은 해상 교통의 핵심 기술이자 안전 지킴이 역할을 하는 <strong>자동식별시스템(AIS)</strong>에 대해 쉽고 명확하게 알아보는 시간을 가지겠습니다.</p>
+        
+        <h3>AIS (Automatic Identification System) 개요: 해상 교통의 똑똑한 길잡이</h3>
+        
+        <p>AIS는 말 그대로 선박의 정보를 <strong>자동으로 식별</strong>하고 <strong>교환</strong>하는 시스템입니다. 복잡한 해상 환경에서 선박들이 서로의 존재를 정확히 알고 안전하게 항해할 수 있도록 돕는 아주 중요한 기술이죠.</p>
+        
+        <h4>1. AIS의 정의: 선박 정보를 자동으로 공유하는 시스템</h4>
+        
+        <p>AIS는 국제전기통신연합(ITU)에 의해 표준화되고 국제해사기구(IMO)에 의해 채택된 해상 항해 안전 통신 시스템입니다. 기본적으로 VHF(초단파) 해상 이동 주파수 대역에서 작동하는 자동 추적 시스템으로, 다음과 같은 역할을 수행합니다:</p>
+        
+        <ul>
+            <li><strong>선박 정보 제공:</strong> 선박의 신원, 종류, 위치, 침로(방향), 속력, 항해 상태 및 기타 안전 관련 정보를 자동으로 주변 선박, 해안 기지국, 항로표지, 그리고 항공기 등 적절하게 장착된 모든 곳에 제공합니다.</li>
+            <li><strong>정보 수신 및 추적:</strong> 이와 유사하게 다른 선박들로부터 이러한 정보를 자동으로 수신하고, 선박들을 모니터링하며 추적합니다.</li>
+            <li><strong>데이터 교환:</strong> 육상 기반 시설과 데이터를 교환합니다.</li>
+        </ul>
+        
+        <p>쉽게 말해, AIS는 선박이 스스로 "나는 누구이고, 어디로 가고 있으며, 얼마나 빠르게 가고 있다"와 같은 핵심 정보를 주변에 끊임없이 알리고, 동시에 주변 선박들의 정보도 실시간으로 파악하여 <strong>해상 교통 상황에 대한 인식을 높여주는</strong> 시스템입니다.</p>
+        
+        <h4>2. AIS의 배경 및 개발 목적</h4>
+        
+        <p>AIS는 처음부터 해상 안전을 최우선 목표로 개발되었습니다. 특히 다음과 같은 배경과 목적을 가지고 있습니다.</p>
+        
+        <ul>
+            <li><strong>충돌 방지 및 항해 안전 증진:</strong> AIS는 원래 <strong>선박용 해상 레이더를 보완</strong>하여 선박 간의 충돌을 방지하기 위해 개발된 자동 추적 시스템입니다. 실시간으로 다른 선박의 위치, 속도, 방향 등의 정보를 제공함으로써 선원들이 충돌 위험을 조기에 파악하고 적절히 대응할 수 있도록 돕습니다.</li>
+            
+            <li><strong>해상 감시 및 교통 관리:</strong> AIS는 해상 당국과 항만에서 선박의 움직임을 모니터링할 수 있도록 합니다. 특히, <strong>선박 교통 서비스(VTS)</strong> 센터에서는 AIS를 활용하여 선박을 식별하고, 위치를 파악하며, 모니터링하여 효율적인 해상 교통 관리를 가능하게 합니다.</li>
+            
+            <li><strong>상황 인식 강화:</strong> 해상 보안 및 항해 안전 강화를 위한 <strong>실시간 상황 인식(real-time situational awareness)</strong>을 제공하는 데 근본적인 역할을 합니다. 넓은 바다에서 시야가 제한될 수 있는 상황에서도 AIS는 '눈'과 같은 역할을 하여 주변 환경에 대한 이해도를 높여줍니다.</li>
+            
+            <li><strong>수색 및 구조 활동 지원:</strong> 해상 사고 시 AIS 데이터는 수색 및 구조(SAR) 활동을 지원하는 데 활용될 수 있습니다. AIS-SART (Search and Rescue Transponder)와 같은 장비는 조난 선박의 위치 및 안전 정보를 전송하여 구조 작업을 돕습니다.</li>
+            
+            <li><strong>표준화된 정보 교환:</strong> 과거에는 선원들이 무선 통신으로 정보를 수동으로 주고받아야 했지만, AIS는 <strong>표준화된 디지털 메시지</strong>를 통해 이 과정을 자동화하여 인적 오류를 줄이고 정보의 정확성과 신뢰성을 높였습니다.</li>
+        </ul>
+        
+        <p>이러한 중요성 때문에 AIS는 국제해사기구(IMO)의 SOLAS(해상인명안전협약) 개정안에 따라 2002년부터 신조 선박에 AIS 설치가 의무화되었고, 이후 모든 SOLAS 적용 대상 선박으로 확대되었습니다.</p>
+        
+        <h3>AIS의 주요 특장점</h3>
+        
+        <div class="overview-features">
+            <div class="feature-card">
+                <h4>🚢 실시간 자동 정보 교환</h4>
+                <p>선박의 핵심 정보를 자동으로 연속적으로 방송하여 인적 오류를 줄이고 업무 부담을 경감시킵니다.</p>
+            </div>
+            
+            <div class="feature-card">
+                <h4>📡 풍부하고 표준화된 정보</h4>
+                <p>선박의 고유 식별자, 실시간 운항 정보, 항해 관련 정보, 안전 관련 메시지를 제공합니다.</p>
+            </div>
+            
+            <div class="feature-card">
+                <h4>🛡️ 견고한 통신 프로토콜</h4>
+                <p>SOTDMA, CSTDMA 기술을 사용하여 혼잡한 해상 환경에서도 안정적인 통신을 유지합니다.</p>
+            </div>
+            
+            <div class="feature-card">
+                <h4>🌍 광범위한 감시 범위</h4>
+                <p>육상 기반 40해리, 위성 기반 1,000해리 이상의 광대한 해양 영역까지 선박을 추적할 수 있습니다.</p>
+            </div>
+        </div>
+        
+        <div class="learning-objectives">
+            <h4>🎯 학습 목표</h4>
+            <ul>
+                <li>✅ AIS의 정의와 기본 개념을 이해한다</li>
+                <li>✅ AIS의 개발 배경과 목적을 설명할 수 있다</li>
+                <li>✅ AIS의 주요 특장점을 파악한다</li>
+                <li>✅ 해상 안전에서의 AIS 역할을 인식한다</li>
+            </ul>
+        </div>
+    `;
+}
+
 function getContent1_1() {
     return `
         <h2>AIS 개요 및 기본 개념</h2>
@@ -1391,6 +1479,139 @@ function getContent4_2() {
                 <li>✅ AIS 기반 VTS 시스템 구성을 설명할 수 있다</li>
                 <li>✅ 교통 흐름 분석 및 최적화 방법을 파악한다</li>
                 <li>✅ 스마트 항만 시스템의 구성 요소를 이해한다</li>
+            </ul>
+        </div>
+    `;
+}
+
+function getContent4_3() {
+    return `
+        <h2>지능형 해상 시스템</h2>
+        
+        <p>미래의 해상 교통은 인공지능, IoT, 블록체인 등 신기술과 융합하여 더욱 지능적이고 효율적인 시스템으로 발전하고 있습니다. AIS는 이러한 지능형 해상 시스템의 핵심 구성 요소로 자리잡고 있습니다.</p>
+        
+        <h3>자율 운항 선박 기술</h3>
+        
+        <h4>자율 운항의 개념</h4>
+        <ul>
+            <li><strong>정의:</strong> 인간의 개입 없이 스스로 항해할 수 있는 선박</li>
+            <li><strong>발전 단계:</strong> 자동화 → 반자율 → 완전 자율</li>
+            <li><strong>핵심 기술:</strong> AI, 센서 융합, 실시간 의사결정</li>
+        </ul>
+        
+        <h4>AIS의 역할</h4>
+        <ul>
+            <li><strong>상황 인식:</strong> 주변 선박과의 실시간 정보 교환</li>
+            <li><strong>충돌 회피:</strong> AI 기반 경로 계획 및 충돌 회피 알고리즘</li>
+            <li><strong>협력 항해:</strong> 선박 간 협력적 의사결정 지원</li>
+            <li><strong>원격 모니터링:</strong> 육상 센터에서의 실시간 모니터링</li>
+        </ul>
+        
+        <h3>IoT 및 블록체인 융합</h3>
+        
+        <h4>IoT 통합 시스템</h4>
+        <ul>
+            <li><strong>센서 네트워크:</strong> 다양한 센서 데이터의 실시간 수집</li>
+            <li><strong>엣지 컴퓨팅:</strong> 선박 내 실시간 데이터 처리</li>
+            <li><strong>클라우드 연동:</strong> 육상 시스템과의 데이터 동기화</li>
+            <li><strong>디지털 트윈:</strong> 선박의 디지털 복제본 구축</li>
+        </ul>
+        
+        <h4>블록체인 기반 보안</h4>
+        <ul>
+            <li><strong>데이터 무결성:</strong> AIS 데이터의 위변조 방지</li>
+            <li><strong>신뢰성 확보:</strong> 분산 원장을 통한 투명한 데이터 관리</li>
+            <li><strong>스마트 계약:</strong> 자동화된 계약 실행</li>
+            <li><strong>추적성:</strong> 선박 이력의 완전한 추적</li>
+        </ul>
+        
+        <h3>e-내비게이션 시스템</h3>
+        
+        <h4>e-내비게이션의 정의</h4>
+        <ul>
+            <li><strong>개념:</strong> 전자 기술을 활용한 통합 항해 시스템</li>
+            <li><strong>목표:</strong> 안전하고 효율적인 항해 지원</li>
+            <li><strong>구성:</strong> AIS, ECDIS, VTS, 항로 정보 서비스</li>
+        </ul>
+        
+        <h4>AIS 기반 e-내비게이션</h4>
+        <ul>
+            <li><strong>실시간 정보 제공:</strong> 항로, 기상, 교통 상황 정보</li>
+            <li><strong>상황 인식 강화:</strong> 종합적인 해상 환경 파악</li>
+            <li><strong>의사결정 지원:</strong> AI 기반 항해 계획 수립</li>
+            <li><strong>위험 관리:</strong> 예측적 위험 감지 및 대응</li>
+        </ul>
+        
+        <h3>VDES (VHF Data Exchange System)</h3>
+        
+        <h4>VDES 개요</h4>
+        <ul>
+            <li><strong>정의:</strong> AIS의 차세대 버전으로 고속 데이터 교환 시스템</li>
+            <li><strong>주파수:</strong> VHF 대역의 추가 채널 활용</li>
+            <li><strong>데이터 속도:</strong> 기존 AIS 대비 10배 이상 향상</li>
+            <li><strong>응용 분야:</strong> 대용량 데이터 전송, 실시간 비디오</li>
+        </ul>
+        
+        <h4>VDES와 AIS의 차이점</h4>
+        <ul>
+            <li><strong>데이터 용량:</strong> VDES는 대용량 데이터 전송 가능</li>
+            <li><strong>전송 속도:</strong> 실시간 멀티미디어 지원</li>
+            <li><strong>보안성:</strong> 향상된 암호화 및 인증</li>
+            <li><strong>호환성:</strong> 기존 AIS와의 완전 호환</li>
+        </ul>
+        
+        <h3>미래 기술 융합</h3>
+        
+        <h4>5G 통신</h4>
+        <ul>
+            <li><strong>초고속 데이터 전송:</strong> 실시간 고화질 비디오 전송</li>
+            <li><strong>낮은 지연시간:</strong> 실시간 제어 시스템 지원</li>
+            <li><strong>대용량 연결:</strong> 수천 개의 IoT 장치 동시 연결</li>
+            <li><strong>에지 컴퓨팅:</strong> 선박 내 실시간 AI 처리</li>
+        </ul>
+        
+        <h4>양자 컴퓨팅</h4>
+        <ul>
+            <li><strong>최적화 문제:</strong> 복잡한 항로 계획 최적화</li>
+            <li><strong>암호화:</strong> 차세대 보안 시스템</li>
+            <li><strong>머신러닝:</strong> 고급 AI 모델 학습</li>
+            <li><strong>시뮬레이션:</strong> 해상 환경 시뮬레이션</li>
+        </ul>
+        
+        <h4>자율 운항 로봇</h4>
+        <ul>
+            <li><strong>드론:</strong> 해상 감시 및 구조 활동</li>
+            <li><strong>수중 로봇:</strong> 해저 탐사 및 유지보수</li>
+            <li><strong>항공 로봇:</strong> 선박 검사 및 지원</li>
+            <li><strong>협력 시스템:</strong> 다중 로봇 협력 작업</li>
+        </ul>
+        
+        <h3>도전 과제 및 해결 방안</h3>
+        
+        <h4>기술적 도전</h4>
+        <ul>
+            <li><strong>신뢰성:</strong> 극한 해상 환경에서의 시스템 안정성</li>
+            <li><strong>보안:</strong> 사이버 공격에 대한 방어 체계</li>
+            <li><strong>호환성:</strong> 기존 시스템과의 연동</li>
+            <li><strong>표준화:</strong> 국제 표준의 통일</li>
+        </ul>
+        
+        <h4>법적 및 규제적 도전</h4>
+        <ul>
+            <li><strong>국제법:</strong> 자율 운항에 대한 국제 규정</li>
+            <li><strong>책임 소재:</strong> 사고 발생 시 책임 주체</li>
+            <li><strong>보험:</strong> 자율 운항 선박 보험 체계</li>
+            <li><strong>인증:</strong> 시스템 안전성 인증 절차</li>
+        </ul>
+        
+        <div class="learning-objectives">
+            <h4>🎯 학습 목표</h4>
+            <ul>
+                <li>✅ 자율 운항 선박에서 AIS의 역할을 이해한다</li>
+                <li>✅ IoT와 블록체인 기술의 융합 방안을 파악한다</li>
+                <li>✅ e-내비게이션 시스템의 구성 요소를 설명할 수 있다</li>
+                <li>✅ VDES와 기존 AIS의 차이점을 비교할 수 있다</li>
+                <li>✅ 미래 기술 융합의 도전 과제를 인식한다</li>
             </ul>
         </div>
     `;

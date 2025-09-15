@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-AIS 교육자료집 PDF 생성 스크립트
-마크다운 파일들을 읽어서 하나의 HTML로 통합하고 PDF로 변환
+AIS 교육자료집 웹 버전 생성 스크립트
+마크다운 파일들을 읽어서 웹 친화적인 HTML로 변환
 """
 
 import os
@@ -11,7 +11,7 @@ import markdown
 from pathlib import Path
 
 def read_markdown_file(file_path):
-    """마크다운 파일을 읽어서 내용 반환"""
+    """마크다운 파일 읽기"""
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
             content = f.read()
@@ -42,7 +42,8 @@ def markdown_to_html(md_content):
         'markdown.extensions.tables',
         'markdown.extensions.fenced_code',
         'markdown.extensions.toc',
-        'markdown.extensions.codehilite'
+        'markdown.extensions.codehilite',
+        'markdown.extensions.extra'
     ]
     
     md = markdown.Markdown(extensions=extensions)
@@ -53,19 +54,19 @@ def markdown_to_html(md_content):
 def create_section_html(section_id, title, subtitle, content_html):
     """섹션 HTML 생성"""
     return f'''
-        <div id="{section_id}" class="content-section">
-            <div class="section-header">
-                <h2>{title}</h2>
-                <p class="section-subtitle">{subtitle}</p>
-            </div>
-            <div class="content">
-                {content_html}
-            </div>
-        </div>
+                <div id="{section_id}" class="section">
+                    <div class="section-header">
+                        <h2>{title}</h2>
+                        <p class="subtitle">{subtitle}</p>
+                    </div>
+                    <div class="content">
+                        {content_html}
+                    </div>
+                </div>
     '''
 
-def build_complete_html():
-    """완전한 HTML 문서 생성"""
+def build_web_version():
+    """웹 버전 HTML 생성"""
     
     # 파일 매핑 (섹션 ID, 제목, 부제목, 파일명)
     sections = [
@@ -87,7 +88,7 @@ def build_complete_html():
     ]
     
     # 기본 HTML 템플릿 읽기
-    with open("AIS 교육자료집 통합본.html", 'r', encoding='utf-8') as f:
+    with open("AIS 교육자료집 웹버전.html", 'r', encoding='utf-8') as f:
         html_template = f.read()
     
     # 섹션 내용 생성
@@ -112,85 +113,38 @@ def build_complete_html():
         sections_html += section_html + "\n"
     
     # HTML에 섹션 내용 삽입
-    # "<!-- 여기에 각 섹션의 내용이 추가됩니다 -->" 부분을 찾아서 교체
-    placeholder = "<!-- 여기에 각 섹션의 내용이 추가됩니다 -->\n        <!-- 실제 구현에서는 각 마크다운 파일의 내용을 읽어와서 HTML로 변환하여 삽입합니다 -->"
+    placeholder = "                <!-- 여기에 각 섹션의 내용이 추가됩니다 -->\n                <!-- 실제 구현에서는 각 마크다운 파일의 내용을 읽어와서 HTML로 변환하여 삽입합니다 -->"
     final_html = html_template.replace(placeholder, sections_html)
     
     # 완성된 HTML 파일 저장
-    with open("AIS 교육자료집 완성본.html", 'w', encoding='utf-8') as f:
+    with open("AIS 교육자료집 완성 웹버전.html", 'w', encoding='utf-8') as f:
         f.write(final_html)
     
-    print("✅ HTML 파일 생성 완료: AIS 교육자료집 완성본.html")
-    return "AIS 교육자료집 완성본.html"
-
-def convert_to_pdf(html_file):
-    """HTML을 PDF로 변환 (wkhtmltopdf 사용)"""
-    try:
-        import subprocess
-        
-        pdf_file = "AIS 교육자료집.pdf"
-        
-        # wkhtmltopdf 명령어 실행
-        cmd = [
-            "wkhtmltopdf",
-            "--page-size", "A4",
-            "--margin-top", "20mm",
-            "--margin-right", "15mm",
-            "--margin-bottom", "20mm",
-            "--margin-left", "15mm",
-            "--encoding", "UTF-8",
-            "--enable-local-file-access",
-            "--print-media-type",
-            "--javascript-delay", "1000",
-            html_file,
-            pdf_file
-        ]
-        
-        result = subprocess.run(cmd, capture_output=True, text=True)
-        
-        if result.returncode == 0:
-            print(f"✅ PDF 파일 생성 완료: {pdf_file}")
-            return pdf_file
-        else:
-            print(f"❌ PDF 변환 오류: {result.stderr}")
-            return None
-            
-    except FileNotFoundError:
-        print("❌ wkhtmltopdf가 설치되지 않았습니다.")
-        print("설치 방법:")
-        print("1. https://wkhtmltopdf.org/downloads.html 에서 다운로드")
-        print("2. 또는 pip install wkhtmltopdf")
-        return None
-    except Exception as e:
-        print(f"❌ PDF 변환 중 오류 발생: {e}")
-        return None
+    print("✅ 웹 버전 HTML 파일 생성 완료: AIS 교육자료집 완성 웹버전.html")
+    return "AIS 교육자료집 완성 웹버전.html"
 
 def main():
     """메인 함수"""
-    print("🚀 AIS 교육자료집 PDF 생성 시작...")
+    print("🚀 AIS 교육자료집 웹 버전 생성 시작...")
     
     # 현재 디렉토리 확인
     current_dir = os.getcwd()
     print(f"작업 디렉토리: {current_dir}")
     
-    # HTML 생성
-    html_file = build_complete_html()
+    # 웹 버전 HTML 생성
+    html_file = build_web_version()
     
     if html_file:
-        print(f"📄 HTML 파일 생성 완료: {html_file}")
-        
-        # PDF 변환 시도
-        pdf_file = convert_to_pdf(html_file)
-        
-        if pdf_file:
-            print(f"📚 PDF 파일 생성 완료: {pdf_file}")
-            print("\n🎉 AIS 교육자료집 생성 완료!")
-            print(f"📁 파일 위치: {os.path.abspath(pdf_file)}")
-        else:
-            print("\n⚠️ PDF 변환 실패. HTML 파일을 브라우저에서 열어서 수동으로 PDF로 저장하세요.")
-            print(f"📁 HTML 파일: {os.path.abspath(html_file)}")
+        print(f"📄 웹 버전 HTML 파일 생성 완료: {html_file}")
+        print(f"\n🎉 AIS 교육자료집 웹 버전 생성 완료!")
+        print(f"📁 파일 위치: {os.path.abspath(html_file)}")
+        print(f"\n📖 사용 방법:")
+        print(f"1. HTML 파일을 브라우저에서 열어서 확인하세요")
+        print(f"2. 목차를 클릭하면 해당 섹션으로 이동합니다")
+        print(f"3. 브라우저에서 Ctrl+P로 PDF로 저장할 수 있습니다")
+        print(f"4. 웹 버전은 반응형 디자인으로 모바일에서도 잘 보입니다")
     else:
-        print("❌ HTML 생성 실패")
+        print("❌ 웹 버전 HTML 생성 실패")
 
 if __name__ == "__main__":
     main()

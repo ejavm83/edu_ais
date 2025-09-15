@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIS 교육자료집 - 종합 학습 가이드</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Malgun Gothic', '맑은 고딕', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+            line-height: 1.7;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2c5aa0 0%, #4a90e2 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+        
+        .header h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header .subtitle {
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header .description {
+            font-size: 1.1em;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .main-content {
+            display: flex;
+            min-height: 80vh;
+        }
+        
+        .sidebar {
+            width: 300px;
+            background: #f8f9fa;
+            border-right: 1px solid #e9ecef;
+            padding: 30px 20px;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+        }
+        
+        .content-area {
+            flex: 1;
+            padding: 40px;
+        }
+        
+        .toc {
+            margin-bottom: 30px;
+        }
+        
+        .toc h2 {
+            color: #2c5aa0;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #2c5aa0;
+        }
+        
+        .toc-section {
+            margin-bottom: 25px;
+        }
+        
+        .toc-section h3 {
+            color: #444;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            padding: 8px 12px;
+            background: white;
+            border-radius: 8px;
+            border-left: 4px solid #2c5aa0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .toc-list li {
+            margin: 5px 0;
+        }
+        
+        .toc-list a {
+            display: block;
+            padding: 12px 15px;
+            text-decoration: none;
+            color: #555;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            font-size: 0.95em;
+            border-left: 3px solid transparent;
+        }
+        
+        .toc-list a:hover {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            color: #2c5aa0;
+            border-left-color: #2c5aa0;
+            transform: translateX(5px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .toc-list a.active {
+            background: linear-gradient(135deg, #2c5aa0 0%, #4a90e2 100%);
+            color: white;
+            border-left-color: #1e3d6f;
+            box-shadow: 0 4px 12px rgba(44, 90, 160, 0.3);
+        }
+        
+        .section {
+            margin-bottom: 60px;
+            padding: 40px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            border: 1px solid #e9ecef;
+        }
+        
+        .section-header {
+            background: linear-gradient(135deg, #2c5aa0 0%, #4a90e2 100%);
+            color: white;
+            padding: 25px 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 6px 20px rgba(44, 90, 160, 0.3);
+        }
+        
+        .section-header h2 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        .section-header .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .content h1, .content h2, .content h3, .content h4, .content h5, .content h6 {
+            color: #2c5aa0;
+            margin: 25px 0 15px 0;
+            font-weight: 600;
+        }
+        
+        .content h1 { font-size: 2.2em; }
+        .content h2 { font-size: 1.8em; }
+        .content h3 { font-size: 1.5em; }
+        .content h4 { font-size: 1.3em; }
+        .content h5 { font-size: 1.1em; }
+        .content h6 { font-size: 1em; }
+        
+        .content p {
+            margin: 15px 0;
+            text-align: justify;
+            font-size: 1.05em;
+        }
+        
+        .content ul, .content ol {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+        
+        .content li {
+            margin: 8px 0;
+            font-size: 1.05em;
+        }
+        
+        .content strong {
+            color: #2c5aa0;
+            font-weight: 600;
+        }
+        
+        .content em {
+            color: #666;
+            font-style: italic;
+        }
+        
+        .content code {
+            background: #f8f9fa;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            color: #e83e8c;
+            font-size: 0.9em;
+        }
+        
+        .content pre {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+            border-left: 4px solid #2c5aa0;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid #2c5aa0;
+            margin: 20px 0;
+            padding: 15px 25px;
+            background: #f8f9fa;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .learning-objectives {
+            background: linear-gradient(135deg, #e8f4fd 0%, #f0f8ff 100%);
+            border: 2px solid #b3d9ff;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        
+        .learning-objectives h3 {
+            color: #2c5aa0;
+            margin-top: 0;
+            font-size: 1.3em;
+        }
+        
+        .learning-guide {
+            background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
+            border: 2px solid #cce7ff;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        
+        .learning-guide h3 {
+            color: #2c5aa0;
+            margin-top: 0;
+            font-size: 1.3em;
+        }
+        
+        .level-guide {
+            margin: 20px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            border-left: 5px solid #2c5aa0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .level-guide h4 {
+            color: #2c5aa0;
+            margin: 0 0 10px 0;
+            font-size: 1.2em;
+        }
+        
+        .checklist {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border: 2px solid #dee2e6;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        
+        .checklist h3 {
+            color: #2c5aa0;
+            margin-top: 0;
+            font-size: 1.3em;
+        }
+        
+        .checklist ul {
+            margin: 15px 0;
+        }
+        
+        .checklist li {
+            margin: 8px 0;
+            list-style: none;
+            font-size: 1.05em;
+        }
+        
+        .checklist li:before {
+            content: "☐ ";
+            color: #2c5aa0;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #2c5aa0 0%, #4a90e2 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 6px 20px rgba(44, 90, 160, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .back-to-top:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(44, 90, 160, 0.6);
+            color: white;
+        }
+        
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(135deg, #2c5aa0 0%, #4a90e2 100%);
+            z-index: 1001;
+            transition: width 0.3s ease;
+        }
+        
+        @media print {
+            body {
+                background: white;
+            }
+            
+            .container {
+                box-shadow: none;
+                border-radius: 0;
+            }
+            
+            .sidebar {
+                display: none;
+            }
+            
+            .back-to-top {
+                display: none;
+            }
+            
+            .progress-bar {
+                display: none;
+            }
+            
+            .section {
+                page-break-before: always;
+                box-shadow: none;
+                border: none;
+            }
+            
+            .section:first-of-type {
+                page-break-before: avoid;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: static;
+            }
+            
+            .content-area {
+                padding: 20px;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <div class="container">
+        <div class="header">
+            <h1>📚 AIS 교육자료집</h1>
+            <p class="subtitle">자동식별시스템 종합 학습 가이드</p>
+            <p class="description">신입사원부터 전문가까지 단계별 학습을 위한 체계적인 교육자료</p>
+        </div>
+
+        <div class="main-content">
+            <nav class="sidebar">
+                <div class="toc">
+                    <h2>📋 목차</h2>
+                    
+                    <div class="toc-section">
+                        <h3>🎯 학습자료 개요</h3>
+                        <ul class="toc-list">
+                            <li><a href="#overview" class="toc-link">AIS 개요</a></li>
+                            <li><a href="#learning-guide" class="toc-link">학습 가이드</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="toc-section">
+                        <h3>1부: AIS 기초 이론</h3>
+                        <ul class="toc-list">
+                            <li><a href="#section-1-1" class="toc-link">1.1 AIS 개요 및 기본 개념</a></li>
+                            <li><a href="#section-1-2" class="toc-link">1.2 AIS 시스템 구성 요소</a></li>
+                            <li><a href="#section-1-3" class="toc-link">1.3 AIS 작동 원리 및 통신 방식</a></li>
+                            <li><a href="#section-1-4" class="toc-link">1.4 AIS 메시지 유형 및 데이터 구조</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="toc-section">
+                        <h3>2부: AIS 규정 및 표준</h3>
+                        <ul class="toc-list">
+                            <li><a href="#section-2-1" class="toc-link">2.1 국제 규정 및 표준</a></li>
+                            <li><a href="#section-2-2" class="toc-link">2.2 국내 규정 및 법령</a></li>
+                            <li><a href="#section-2-3" class="toc-link">2.3 AIS 설치 의무 대상</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="toc-section">
+                        <h3>3부: AIS 데이터 처리 및 분석</h3>
+                        <ul class="toc-list">
+                            <li><a href="#section-3-1" class="toc-link">3.1 AIS 데이터 전처리</a></li>
+                            <li><a href="#section-3-2" class="toc-link">3.2 데이터 품질 관리</a></li>
+                            <li><a href="#section-3-3" class="toc-link">3.3 기계학습 및 AI 활용</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="toc-section">
+                        <h3>4부: AIS 활용 분야</h3>
+                        <ul class="toc-list">
+                            <li><a href="#section-4-1" class="toc-link">4.1 해상 안전 및 보안</a></li>
+                            <li><a href="#section-4-2" class="toc-link">4.2 해상 교통 관제</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="toc-section">
+                        <h3>5부: 실습 및 평가</h3>
+                        <ul class="toc-list">
+                            <li><a href="#section-5-1" class="toc-link">5.1 퀴즈 및 연습문제</a></li>
+                            <li><a href="#section-5-2" class="toc-link">5.2 핵심 용어 사전</a></li>
+                            <li><a href="#section-5-3" class="toc-link">5.3 참고 자료 및 링크</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <main class="content-area">
+                <div id="overview" class="section">
+                    <div class="section-header">
+                        <h2>🎯 AIS 개요</h2>
+                        <p class="subtitle">자동식별시스템의 기본 개념과 중요성</p>
+                    </div>
+                    <div class="content">
+                        <p>신입사원 여러분, 안녕하세요! 오늘은 해상 교통의 핵심 기술이자 안전 지킴이 역할을 하는 <strong>자동식별시스템(AIS)</strong>에 대해 쉽고 명확하게 알아보는 시간을 가지겠습니다.</p>
+                        
+                        <h3>AIS (Automatic Identification System) 개요: 해상 교통의 똑똑한 길잡이</h3>
+                        
+                        <p>AIS는 말 그대로 선박의 정보를 <strong>자동으로 식별</strong>하고 <strong>교환</strong>하는 시스템입니다. 복잡한 해상 환경에서 선박들이 서로의 존재를 정확히 알고 안전하게 항해할 수 있도록 돕는 아주 중요한 기술이죠.</p>
+                        
+                        <h4>1. AIS의 정의: 선박 정보를 자동으로 공유하는 시스템</h4>
+                        
+                        <p>AIS는 국제전기통신연합(ITU)에 의해 표준화되고 국제해사기구(IMO)에 의해 채택된 해상 항해 안전 통신 시스템입니다. 기본적으로 VHF(초단파) 해상 이동 주파수 대역에서 작동하는 자동 추적 시스템으로, 다음과 같은 역할을 수행합니다:</p>
+                        
+                        <ul>
+                            <li><strong>선박 정보 제공:</strong> 선박의 신원, 종류, 위치, 침로(방향), 속력, 항해 상태 및 기타 안전 관련 정보를 자동으로 주변 선박, 해안 기지국, 항로표지, 그리고 항공기 등 적절하게 장착된 모든 곳에 제공합니다.</li>
+                            <li><strong>정보 수신 및 추적:</strong> 이와 유사하게 다른 선박들로부터 이러한 정보를 자동으로 수신하고, 선박들을 모니터링하며 추적합니다.</li>
+                            <li><strong>데이터 교환:</strong> 육상 기반 시설과 데이터를 교환합니다.</li>
+                        </ul>
+                        
+                        <p>쉽게 말해, AIS는 선박이 스스로 "나는 누구이고, 어디로 가고 있으며, 얼마나 빠르게 가고 있다"와 같은 핵심 정보를 주변에 끊임없이 알리고, 동시에 주변 선박들의 정보도 실시간으로 파악하여 <strong>해상 교통 상황에 대한 인식을 높여주는</strong> 시스템입니다.</p>
+                        
+                        <h4>2. AIS의 배경 및 개발 목적</h4>
+                        
+                        <p>AIS는 처음부터 해상 안전을 최우선 목표로 개발되었습니다. 특히 다음과 같은 배경과 목적을 가지고 있습니다.</p>
+                        
+                        <ul>
+                            <li><strong>충돌 방지 및 항해 안전 증진:</strong> AIS는 원래 <strong>선박용 해상 레이더를 보완</strong>하여 선박 간의 충돌을 방지하기 위해 개발된 자동 추적 시스템입니다.</li>
+                            <li><strong>해상 감시 및 교통 관리:</strong> AIS는 해상 당국과 항만에서 선박의 움직임을 모니터링할 수 있도록 합니다.</li>
+                            <li><strong>상황 인식 강화:</strong> 해상 보안 및 항해 안전 강화를 위한 <strong>실시간 상황 인식</strong>을 제공하는 데 근본적인 역할을 합니다.</li>
+                            <li><strong>수색 및 구조 활동 지원:</strong> 해상 사고 시 AIS 데이터는 수색 및 구조(SAR) 활동을 지원하는 데 활용될 수 있습니다.</li>
+                            <li><strong>표준화된 정보 교환:</strong> 과거에는 선원들이 무선 통신으로 정보를 수동으로 주고받아야 했지만, AIS는 <strong>표준화된 디지털 메시지</strong>를 통해 이 과정을 자동화하여 인적 오류를 줄이고 정보의 정확성과 신뢰성을 높였습니다.</li>
+                        </ul>
+                        
+                        <p>이러한 중요성 때문에 AIS는 국제해사기구(IMO)의 SOLAS(해상인명안전협약) 개정안에 따라 2002년부터 신조 선박에 AIS 설치가 의무화되었고, 이후 모든 SOLAS 적용 대상 선박으로 확대되었습니다.</p>
+                        
+                        <p>결론적으로 AIS는 단순한 항해 장비를 넘어, 해상 교통 전체의 안전과 효율성을 혁신적으로 개선한 필수적인 시스템이라고 할 수 있습니다.</p>
+                    </div>
+                </div>
+
+                <div id="learning-guide" class="section">
+                    <div class="section-header">
+                        <h2>📚 학습 가이드</h2>
+                        <p class="subtitle">효과적인 학습을 위한 단계별 가이드</p>
+                    </div>
+                    <div class="content">
+                        <div class="learning-objectives">
+                            <h3>🎯 학습 목표</h3>
+                            <p>이 교육자료집을 통해 다음을 달성할 수 있습니다:</p>
+                            <ul>
+                                <li>AIS의 기본 개념과 작동 원리를 완전히 이해</li>
+                                <li>AIS 관련 국제 규정과 표준을 숙지</li>
+                                <li>AIS 데이터 처리 및 분석 방법을 습득</li>
+                                <li>AIS를 활용한 해상 안전 시스템을 설계</li>
+                                <li>AI/ML 기술을 활용한 고급 AIS 분석 수행</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="learning-guide">
+                            <h3>📖 학습 방법</h3>
+                            
+                            <div class="level-guide">
+                                <h4>초급자 (신입사원)</h4>
+                                <p><strong>학습 시간:</strong> 4-6주 | <strong>중점 사항:</strong> 기본 개념과 규정 이해</p>
+                                <p><strong>추천 순서:</strong> AIS 개요 → 1부 기초 이론 → 2부 규정 및 표준 → 5부 평가</p>
+                            </div>
+                            
+                            <div class="level-guide">
+                                <h4>중급자 (경험자)</h4>
+                                <p><strong>학습 시간:</strong> 3-4주 | <strong>중점 사항:</strong> 데이터 처리 및 분석</p>
+                                <p><strong>추천 순서:</strong> 1부 기초 이론 → 3부 데이터 처리 → 4부 활용 분야 → 5부 평가</p>
+                            </div>
+                            
+                            <div class="level-guide">
+                                <h4>고급자 (전문가)</h4>
+                                <p><strong>학습 시간:</strong> 2-3주 | <strong>중점 사항:</strong> 고급 분석 및 시스템 개발</p>
+                                <p><strong>추천 순서:</strong> 전체 내용 → 3부 AI/ML 활용 → 4부 활용 분야 → 5부 참고 자료</p>
+                            </div>
+                        </div>
+                        
+                        <div class="checklist">
+                            <h3>✅ 학습 체크리스트</h3>
+                            <ul>
+                                <li>각 섹션의 학습 목표를 달성했는지 확인</li>
+                                <li>체크리스트의 모든 항목을 완료했는지 점검</li>
+                                <li>퀴즈와 연습문제를 통해 이해도 검증</li>
+                                <li>실무 적용 방안을 구체적으로 제시할 수 있는지 확인</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 여기에 각 섹션의 내용이 추가됩니다 -->
+                <!-- 실제 구현에서는 각 마크다운 파일의 내용을 읽어와서 HTML로 변환하여 삽입합니다 -->
+                
+            </main>
+        </div>
+    </div>
+
+    <a href="#" class="back-to-top" id="backToTop">↑ 맨 위로</a>
+
+    <script>
+        // 부드러운 스크롤 효과
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    
+                    // 목차에서 활성 링크 업데이트
+                    updateActiveLink(this);
+                }
+            });
+        });
+        
+        // 활성 링크 업데이트
+        function updateActiveLink(activeLink) {
+            document.querySelectorAll('.toc-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            activeLink.classList.add('active');
+        }
+        
+        // 스크롤 진행률 표시
+        window.addEventListener('scroll', function() {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progressBar').style.width = scrolled + '%';
+            
+            // 맨 위로 버튼 표시/숨김
+            const backToTop = document.getElementById('backToTop');
+            if (winScroll > 300) {
+                backToTop.style.display = 'block';
+            } else {
+                backToTop.style.display = 'none';
+            }
+        });
+        
+        // 맨 위로 버튼 클릭 이벤트
+        document.getElementById('backToTop').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // 페이지 로드 시 첫 번째 링크 활성화
+        document.addEventListener('DOMContentLoaded', function() {
+            const firstLink = document.querySelector('.toc-link');
+            if (firstLink) {
+                firstLink.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>
