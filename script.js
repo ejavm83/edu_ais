@@ -59,8 +59,10 @@ function showSection(sectionId) {
     }
     
     // 콘텐츠 섹션은 별도 처리
-    if (sectionId !== 'content') {
-        document.getElementById('content').classList.remove('active');
+    const contentSection = document.getElementById('content');
+    if (contentSection && sectionId !== 'content') {
+        contentSection.classList.remove('active');
+        contentSection.style.display = 'none';
     }
 }
 
